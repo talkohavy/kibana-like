@@ -1,0 +1,12 @@
+{
+  "extends": "../../jsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "noImplicitOverride": true, // If you use inheritance, and you provide an override function, you must specify that it is an override function.
+    "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
+    "outDir": "dist"
+  },
+  "exclude": ["node_modules", "**/node_modules/*", "<node_internals>/**", "bin/**"],
+  "include": ["**/*/*.ts", "**/*.d.ts", "**/*.js", "**/*.jsx", "**/*.cjs", "*.ts", "*.d.ts", "*.js", "*.jsx", "*.cjs"]
+}
