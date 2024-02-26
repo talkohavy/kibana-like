@@ -1,4 +1,5 @@
 import { Suspense, lazy } from 'react';
+import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/index';
 
@@ -10,6 +11,9 @@ const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 const isNotAuthorized = true;
 
 function App() {
+  const store = useSelector((state) => state);
+  console.log('store is:', store);
+
   if (isNotAuthorized)
     return (
       <Suspense>
