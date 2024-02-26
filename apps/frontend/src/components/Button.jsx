@@ -2,7 +2,7 @@ import clsx from 'clsx';
 
 const CLASSES = {
   common:
-    'flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-white hover:rounded-xl disabled:pointer-events-none disabled:cursor-default disabled:bg-gray-200 focus:rounded-2xl',
+    'flex cursor-pointer items-center justify-center rounded-md px-3 py-1 text-white hover:rounded-lg disabled:pointer-events-none disabled:cursor-default disabled:bg-gray-200 active:rounded-xl',
   sizes: {
     xs: 'h-8',
     sm: 'h-10',
