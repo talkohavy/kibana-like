@@ -1,8 +1,0 @@
-{
-  "root": false,
-  "extends": ["plugin:ezlint/recommended", "plugin:ezlint/react"],
-  "rules": {
-    "tailwindcss/no-custom-classname": "off",
-    "react/no-unstable-nested-components": "off"
-  }
-}
