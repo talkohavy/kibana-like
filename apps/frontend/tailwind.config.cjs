@@ -6,6 +6,16 @@ module.exports = {
   theme: {
     screens: { sm: '480px', md: '768px', lg: '976px', xl: '1440px' },
     extend: {
+      colors: {
+        'blueish-300': '#2b86c9',
+        'blueish-400': '#0277cc',
+        'blueish-500': '#0e73bc',
+        'blueish-600': '#0161a6',
+        'blueish-900': 'hsl(228,39%,23%)',
+        lightGray: 'hsl(227,12%,61%)',
+        'black-800': 'hsl(233,12%,13%)',
+        'cream-200': 'hsl(13,100%,96%)',
+      },
       spacing: {
         13: '3.25rem',
         15: '3.75rem',

@@ -11,7 +11,7 @@ const CLASSES = {
   },
   colors: {
     red: 'bg-red-400 hover:bg-red-500 active:bg-red-400',
-    blue: 'bg-blue-600 hover:bg-blue-700 active:bg-blue-600',
+    blue: 'bg-blueish-400 hover:bg-blueish-300 active:bg-blueish-500',
     green: 'bg-green-400 hover:bg-green-500 active:bg-green-400',
   },
 };

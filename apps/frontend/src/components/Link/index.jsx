@@ -1,5 +1,5 @@
-import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import { twMerge } from 'tailwind-merge';
 
 /**
  * @param {{
@@ -18,7 +18,7 @@ export default function MyLink({ children, to, onClick, onMouseOver, className, 
       to={to}
       onClick={onClick}
       onMouseOver={onMouseOver}
-      className={clsx('flex cursor-pointer items-center justify-center', className)}
+      className={twMerge('flex cursor-pointer items-center justify-center text-blueish-600', className)}
       style={style}
       data-test-id={`${testId}Link`}
     >
