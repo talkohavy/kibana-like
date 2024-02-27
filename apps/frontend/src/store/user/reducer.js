@@ -1,14 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { login } from './actions';
+import { setIsLoggedIn } from './actions';
 
 const INITIAL_STATE = {
   isLogged: false,
-  user: null,
-  isLoading: false,
 };
 
 export const userReducer = createReducer(INITIAL_STATE, ({ addCase }) => {
-  addCase(login, (state) => {
-    state.isLoading = true;
+  addCase(setIsLoggedIn, (state, action) => {
+    state.isLogged = action.payload.isLogged;
   });
 });

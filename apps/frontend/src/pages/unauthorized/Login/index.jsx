@@ -1,16 +1,19 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Box from '../../../components/Box';
 import Button from '../../../components/Button';
 import InputFloat from '../../../components/InputFloat';
 import LogoCircle from '../../../components/LogoCircle';
+import { login } from '../../../store/user/actions';
 import LockIcon from '../../../utils/svgs/LockIcon';
 import Background from './Background';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogin = () => dispatch(login());
 
   return (
     <Background>
@@ -35,7 +38,7 @@ export default function LoginPage() {
         </div>
 
         <div className='flex w-full items-center justify-start'>
-          <Button color='blue' label='Login' onClick={() => navigate('/login')} size='sm' />
+          <Button color='blue' label='Login' onClick={handleLogin} size='sm' />
         </div>
       </Box>
     </Background>
