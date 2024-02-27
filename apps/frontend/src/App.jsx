@@ -3,18 +3,20 @@ import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/index';
 
+/** @typedef {import('./store/types').State} State */
+
 const FirstConfigure = lazy(() => import('./pages/unauthorized/FirstConfigure'));
 const Login = lazy(() => import('./pages/unauthorized/Login'));
 const HomePage = lazy(() => import('./pages/authorized/Home'));
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 
-const isNotAuthorized = true;
-
 function App() {
-  const store = useSelector((state) => state);
-  console.log('store is:', store);
+  const { isLogged: isAuthorized } = useSelector(
+    /** @param {State} state */
+    (state) => state.user,
+  );
 
-  if (isNotAuthorized)
+  if (!isAuthorized)
     return (
       <Suspense>
         <Routes>

@@ -1,7 +1,7 @@
 import type { AnyAction } from '@reduxjs/toolkit';
 
 declare type State = {
-  user: any;
+  user: { isLogged: boolean };
 };
 
 declare type GetStateFunction = () => State;
