@@ -9,8 +9,14 @@ import Avatar from './Avatar';
 
 export default function Header() {
   return (
-    <>
-      <div className='flex h-12 items-center justify-between bg-[#25282f] px-4 shadow-sm dark:bg-gray-800 dark:shadow-dark-sm'>
+    <header
+      className='relative w-full'
+      style={{
+        boxShadow:
+          'rgba(0, 0, 0, 0.07) 0px 0.7px 1.4px, rgba(0, 0, 0, 0.05) 0px 1.9px 4px, rgba(0, 0, 0, 0.05) 0px 4.5px 10px',
+      }}
+    >
+      <div className='flex h-12 items-center justify-between bg-[#25282f] px-4 dark:bg-gray-800 dark:shadow-dark-sm'>
         <div className='flex items-center justify-between'>
           <ElasticIcon size={25} className='cursor-pointer' />
           <ElasticWord size={64} className='ml-2' />
@@ -24,7 +30,7 @@ export default function Header() {
         </div>
       </div>
 
-      <div className='flex h-12 items-center justify-between border px-4'>
+      <div className='flex h-12 items-center justify-between px-4'>
         <div className='flex items-center justify-between gap-5'>
           <HamburgerIcon size={18} className='cursor-pointer' />
           {/* <BreadCrumbs /> */}
@@ -32,6 +38,6 @@ export default function Header() {
 
         <ApplicationsIcon size={18} className='cursor-pointer' />
       </div>
-    </>
+    </header>
   );
 }
