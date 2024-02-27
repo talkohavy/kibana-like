@@ -1,14 +1,22 @@
+import { useSelector } from 'react-redux';
 import Header from './Header/index';
 import Main from './Main/index';
 import Sidebar from './Sidebar/index';
 
+/** @typedef {import('../../store/types').State} State */
+
 export default function Layout({ children }) {
+  const { isSidebarOpen } = useSelector(
+    /** @param {State} state */
+    (state) => state,
+  );
+
   return (
     <div className='h-full'>
       <Header />
 
       <div className='flex h-full items-center justify-center'>
-        <Sidebar />
+        {isSidebarOpen && <Sidebar />}
 
         <Main>{children}</Main>
       </div>
