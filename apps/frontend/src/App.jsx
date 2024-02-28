@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/index';
+import Redirect from './components/Redirect';
 
 /** @typedef {import('./store/types').State} State */
 
@@ -24,6 +25,8 @@ function App() {
           <Route path='/index.html' element={<FirstConfigure />} />
           <Route path='/' element={<FirstConfigure />} />
           <Route path='/login' element={<Login />} />
+
+          <Route path='*' element={<Redirect />} />
         </Routes>
       </Suspense>
     );

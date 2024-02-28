@@ -3,7 +3,7 @@ import TabsNav from './TabsNav';
 
 export default function TopBar({ selectedTab, setSelectedTab }) {
   return (
-    <div className='flex h-44 flex-col items-start justify-between space-y-6 border border-b-[#d3dae6] bg-[#f7f8fc] px-20 pt-6'>
+    <div className='flex h-44 flex-col items-start justify-between space-y-6 border border-b-[#d3dae6] bg-[#f7f8fc] px-6 pt-6'>
       <h1 className='text-3xl font-bold'>More ways to add data</h1>
 
       <p>
