@@ -223,6 +223,7 @@ module.exports = {
         '4xl': '2rem', // use like so: rounded-4xl
       },
       boxShadow: {
+        down: 'rgba(0, 0, 0, 0.08) 0px 0.9px 4px, rgba(0, 0, 0, 0.06) 0px 2.6px 8px, rgba(0, 0, 0, 0.05) 0px 5.7px 12px, rgba(0, 0, 0, 0.04) 0px 15px 15px',
         '2xs': '0 0 1px 1px rgba(0, 0, 0, 0.1)',
         xs: '0 0 2px 2px rgba(0, 0, 0, 0.1)',
         sm: '0 0 4px 4px rgba(0, 0, 0, 0.1)',
