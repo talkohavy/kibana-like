@@ -8,6 +8,7 @@ import Layout from './components/Layout/index';
 const FirstConfigure = lazy(() => import('./pages/unauthorized/FirstConfigure'));
 const Login = lazy(() => import('./pages/unauthorized/Login'));
 const HomePage = lazy(() => import('./pages/authorized/Home'));
+const UploadFilePage = lazy(() => import('./pages/authorized/UploadFilePage'));
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
         <Routes>
           <Route path='/index.html' element={<HomePage />} />
           <Route path='/' element={<HomePage />} />
-          {/* <Route path='/list' element={<ListPage />} /> */}
+          <Route path='/upload-file' element={<UploadFilePage />} />
           {/* <Route path='/list/:id' element={<SinlgeItemPage />} /> */}
 
           <Route path='*' element={<PageNotFound />} />

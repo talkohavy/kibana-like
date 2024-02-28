@@ -18,7 +18,7 @@ export default function MyLink({ children, to, onClick, onMouseOver, className, 
       to={to}
       onClick={onClick}
       onMouseOver={onMouseOver}
-      className={twMerge('flex cursor-pointer items-center justify-center text-blueish-600', className)}
+      className={twMerge('inline-flex cursor-pointer items-center justify-center text-blueish-600', className)}
       style={style}
       data-test-id={`${testId}Link`}
     >

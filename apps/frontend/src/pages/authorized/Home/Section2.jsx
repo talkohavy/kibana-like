@@ -33,7 +33,7 @@ export default function Section2() {
             <span>Try sample data</span>
           </MyLink>
 
-          <MyLink to='#' className='flex items-center justify-between gap-2'>
+          <MyLink to='/upload-file' className='flex items-center justify-between gap-2'>
             <UploadFileIcon size={18} color={COLORS.blueish_600} />
             <span>Upload a file</span>
           </MyLink>
