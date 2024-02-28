@@ -24,8 +24,6 @@ export default function Section2() {
                 <span>Add integrations</span>
               </div>
             }
-            color='blue'
-            size='sm'
           />
 
           <MyLink to='#' className='flex items-center justify-between gap-2'>
@@ -53,7 +51,7 @@ export default function Section2() {
 
           <p>Deploy, scale, and upgrade your stack faster with Elastic Cloud. We’ll help you quickly move your data.</p>
 
-          <Button label='Move to Elastic Cloud' color='green' size='sm' />
+          <Button label='Move to Elastic Cloud' isPrimary={false} />
         </div>
       </div>
     </div>

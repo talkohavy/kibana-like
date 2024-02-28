@@ -1,4 +1,4 @@
-import clsx from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 const CLASSES = {
   common:
@@ -10,29 +10,28 @@ const CLASSES = {
     lg: 'h-14',
   },
   colors: {
-    red: 'bg-red-400 hover:bg-red-500 active:bg-red-400',
-    blue: 'bg-blueish-400 hover:bg-blueish-300 active:bg-blueish-500',
-    green: 'bg-green-400 hover:bg-green-500 active:bg-green-400',
+    primary: 'bg-blueish-400 hover:bg-blueish-300 active:bg-blueish-500',
+    secondary: 'bg-[#cce4f5] text-[#0161a6] hover:bg-[#daf0ff] active:bg-[#bcd5e6]',
   },
 };
 
 /**
  * @param {{
- *    size?: 'xs' | 'sm' | 'md' | 'lg',
- *    color?: 'red' | 'blue' | 'green',
- *    onClick?: () => void,
- *    onFocus?: () => void,
- *    isDisabled?: boolean,
- *    onMouseOver?: () => void,
- *    className?: string,
- *    style?: any,
- *    label: import('react').ReactNode,
- *    testId?: string,
+ *   isPrimary?: boolean,
+ *   size?: 'xs' | 'sm' | 'md' | 'lg',
+ *   onClick?: () => void,
+ *   onFocus?: () => void,
+ *   isDisabled?: boolean,
+ *   onMouseOver?: () => void,
+ *   className?: string,
+ *   style?: any,
+ *   label: import('react').ReactNode,
+ *   testId?: string,
  * }} props
  */
 export default function Button({
-  size = 'md',
-  color,
+  isPrimary = true,
+  size = 'sm',
   onClick,
   onFocus,
   isDisabled,
@@ -42,6 +41,8 @@ export default function Button({
   testId = '',
   label,
 }) {
+  const buttonType = isPrimary ? 'primary' : 'secondary';
+
   return (
     <button
       type='button'
@@ -49,7 +50,7 @@ export default function Button({
       onFocus={onFocus}
       disabled={isDisabled}
       onMouseOver={onMouseOver}
-      className={clsx(CLASSES.common, CLASSES.sizes[size], CLASSES.colors[color], className)}
+      className={twMerge(CLASSES.common, CLASSES.sizes[size], CLASSES.colors[buttonType], className)}
       style={style}
       data-test-id={`${testId}Button`}
     >

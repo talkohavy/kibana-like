@@ -36,7 +36,7 @@ export default function FirstConfigure() {
             <span>Configure manually</span>
           </button>
 
-          <Button color='blue' label='Configure Elastic' onClick={() => navigate('/login')} size='md' />
+          <Button label='Configure Elastic' onClick={() => navigate('/login')} size='md' />
         </div>
       </Box>
     </Background>

@@ -26,8 +26,6 @@ export default function UploadSampleData() {
               </div>
             }
             onClick={() => console.log('start exploring')}
-            size='sm'
-            color='blue'
             className='mt-3'
           />
         </div>

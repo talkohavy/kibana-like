@@ -33,12 +33,13 @@ export default function LoginPage() {
             type='password'
             value={password}
             setValue={setPassword}
+            // eslint-disable-next-line
             iconRenderer={() => <LockIcon className='ml-2' />}
           />
         </div>
 
         <div className='flex w-full items-center justify-start'>
-          <Button color='blue' label='Login' onClick={handleLogin} size='sm' />
+          <Button label='Login' onClick={handleLogin} />
         </div>
       </Box>
     </Background>
