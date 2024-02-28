@@ -8,43 +8,41 @@ export default function UploadSampleData() {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
   return (
-    <div>
-      <div className='w-full p-6'>
-        <div className='flex w-full items-start justify-between gap-10 rounded-md border border-neutral-300 p-8'>
-          <div className='flex h-60 w-full flex-col items-start justify-center gap-2'>
-            <h2 className='text-xl font-bold'>Explore our live demo environment</h2>
+    <div className='mx-auto w-full max-w-7xl space-y-6 p-6'>
+      <div className='flex w-full items-start justify-between gap-10 rounded-md border border-neutral-300 p-8'>
+        <div className='flex h-60 w-full flex-col items-start justify-center gap-2'>
+          <h2 className='text-xl font-bold'>Explore our live demo environment</h2>
 
-            <p>
-              Browse real-world data in a demo environment where you can explore search, observability, and security use
-              cases like yours.
-            </p>
+          <p>
+            Browse real-world data in a demo environment where you can explore search, observability, and security use
+            cases like yours.
+          </p>
 
-            <Button
-              label={
-                <div className='flex items-center justify-between gap-2'>
-                  <span>Start exploring</span>
-                  <ExploreIcon size={16} color='white' />
-                </div>
-              }
-              onClick={() => console.log('start exploring')}
-              size='sm'
-              color='blue'
-              className='mt-3'
+          <Button
+            label={
+              <div className='flex items-center justify-between gap-2'>
+                <span>Start exploring</span>
+                <ExploreIcon size={16} color='white' />
+              </div>
+            }
+            onClick={() => console.log('start exploring')}
+            size='sm'
+            color='blue'
+            className='mt-3'
+          />
+        </div>
+        <div className='h-60 w-full'>
+          <figure className='h-full w-full'>
+            <img
+              alt='Illustration of Elastic data integrations'
+              src='/static/images/graph-data.png'
+              className='h-full w-full object-contain'
             />
-          </div>
-          <div className='h-60 w-full'>
-            <figure className='h-full w-full'>
-              <img
-                alt='Illustration of Elastic data integrations'
-                src='/static/images/graph-data.png'
-                className='h-full w-full object-contain'
-              />
-            </figure>
-          </div>
+          </figure>
         </div>
       </div>
 
-      <div className='p-6'>
+      <div>
         <button
           type='button'
           className='group flex items-center justify-start gap-1'
