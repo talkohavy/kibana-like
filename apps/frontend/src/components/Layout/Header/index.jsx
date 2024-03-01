@@ -10,7 +10,7 @@ import Avatar from './Avatar';
 export default function Header() {
   return (
     <header
-      className='relative w-full'
+      className='relative flex w-full shrink-0 flex-col'
       style={{
         boxShadow:
           'rgba(0, 0, 0, 0.07) 0px 0.7px 1.4px, rgba(0, 0, 0, 0.05) 0px 1.9px 4px, rgba(0, 0, 0, 0.05) 0px 4.5px 10px',
