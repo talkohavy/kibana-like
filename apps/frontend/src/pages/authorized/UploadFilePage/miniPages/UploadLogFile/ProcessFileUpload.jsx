@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../../../../components/Button';
 import ProgressStages from '../../../../../components/ProgressStages.jsx';
 import CompassIcon from '../../../../../utils/svgs/CompassIcon';
@@ -41,6 +42,8 @@ const stagesInitialState = [
 ];
 
 export default function ProcessFileUpload({ isUploading }) {
+  const navigate = useNavigate();
+
   const [stagesUpdated, setStagesUpdated] = useState(() => [...stagesInitialState]);
   const [isViewButtonDisabled, setIsViewButtonDisabled] = useState(true);
 
@@ -112,6 +115,7 @@ export default function ProcessFileUpload({ isUploading }) {
             <span>View Log Results</span>
           </div>
         }
+        onClick={() => navigate('/view-logs')}
         className='mx-auto'
         isDisabled={isViewButtonDisabled}
       />

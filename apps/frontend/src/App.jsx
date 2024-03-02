@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/index';
 import Redirect from './components/Redirect';
+import ViewLogs from './pages/authorized/ViewLogs';
 
 /** @typedef {import('./store/types').State} State */
 
@@ -38,6 +39,7 @@ function App() {
           <Route path='/index.html' element={<HomePage />} />
           <Route path='/' element={<HomePage />} />
           <Route path='/upload-file' element={<UploadFilePage />} />
+          <Route path='/view-logs' element={<ViewLogs />} />
           {/* <Route path='/list/:id' element={<SinlgeItemPage />} /> */}
 
           <Route path='*' element={<PageNotFound />} />
