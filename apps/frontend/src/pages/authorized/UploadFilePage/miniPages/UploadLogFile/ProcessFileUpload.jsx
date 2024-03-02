@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import { twMerge } from 'tailwind-merge';
 import Button from '../../../../../components/Button';
-import CheckMark from '../../../../../utils/svgs/CheckMark';
+import ProgressStages from '../../../../../components/ProgressStages.jsx';
 import CompassIcon from '../../../../../utils/svgs/CompassIcon';
 
 /**
  * @typedef {{
- *   name: string,
  *   title: string,
+ *   tooltip: string,
  *   status: 'completed' | 'in-progress' | 'to-do'
  * }} Stage
  */
@@ -15,34 +14,35 @@ import CompassIcon from '../../../../../utils/svgs/CompassIcon';
 /** @type {Array<Stage>} */
 const stagesInitialState = [
   {
-    name: 'File processed',
-    title: 'Step 1: File processed is complete',
+    title: 'File processed',
+    tooltip: 'Step 1: File processed is complete',
     status: 'to-do',
   },
   {
-    name: 'Index created',
-    title: 'Step 2: ...',
+    title: 'Index created',
+    tooltip: 'Step 2: Index created is complete',
     status: 'to-do',
   },
   {
-    name: 'Ingest pipeline created',
-    title: 'Step 3: ...',
+    title: 'Ingest pipeline created',
+    tooltip: 'Step 3: Ingest pipeline created is complete',
     status: 'to-do',
   },
   {
-    name: 'Data uploaded',
-    title: 'Step 4: ...',
+    title: 'Data uploaded',
+    tooltip: 'Step 4: Data uploaded is complete',
     status: 'to-do',
   },
   {
-    name: 'Data view created',
-    title: 'Step 5: ...',
+    title: 'Data view created',
+    tooltip: 'Step 5: Data view created is complete',
     status: 'to-do',
   },
 ];
 
 export default function ProcessFileUpload({ isUploading }) {
   const [stagesUpdated, setStagesUpdated] = useState(() => [...stagesInitialState]);
+  const [isViewButtonDisabled, setIsViewButtonDisabled] = useState(true);
 
   useEffect(() => {
     if (!isUploading) return;
@@ -95,40 +95,14 @@ export default function ProcessFileUpload({ isUploading }) {
         newState[4].status = 'completed';
         return newState;
       });
+      setIsViewButtonDisabled(false);
     }, 14000);
   }, [isUploading]);
 
   return (
-    <div className='space-y-6 p-12'>
+    <div className='mx-auto max-w-7xl space-y-6 p-12'>
       <div className='space-y-6 rounded-lg border p-4 shadow-down'>
-        <ol className='flex items-stretch bg-transparent'>
-          {stagesUpdated.map(({ name, title, status }, index) => (
-            <li key={name} className='relative flex-grow basis-0'>
-              {index < stagesUpdated.length - 1 && (
-                <div className='absolute left-1/2 top-[40px] h-px w-full bg-teal-400' />
-              )}
-              <button
-                type='button'
-                data-step-status={status}
-                title={title}
-                className='relative flex cursor-pointer flex-col items-center justify-start'
-                style={{ inlineSize: '100%', paddingInline: 16, paddingBlock: '24px 16px' }}
-              >
-                <span
-                  className={twMerge(
-                    'inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-white',
-                    status === 'to-do' && 'border border-neutral-300',
-                    status === 'in-progress' && 'bg-blue-600 text-white',
-                    status === 'completed' && 'bg-[#4dd2ca]',
-                  )}
-                >
-                  {status === 'completed' ? <CheckMark size={14} /> : index + 1}
-                </span>
-                <span className='mt-2 font-bold'>{name}</span>
-              </button>
-            </li>
-          ))}
-        </ol>
+        <ProgressStages stages={stagesUpdated} />
       </div>
 
       <Button
@@ -139,7 +113,7 @@ export default function ProcessFileUpload({ isUploading }) {
           </div>
         }
         className='mx-auto'
-        isDisabled
+        isDisabled={isViewButtonDisabled}
       />
     </div>
   );
