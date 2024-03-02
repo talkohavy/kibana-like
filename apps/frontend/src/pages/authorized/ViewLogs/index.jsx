@@ -1,5 +1,6 @@
 import Resizable from '../../../components/Resizable';
 import Background from './Background';
+import MainView from './MainView';
 import Sidebar from './Sidebar';
 
 export default function ViewLogs() {
@@ -12,7 +13,7 @@ export default function ViewLogs() {
           {({ position: x }) => <Sidebar width={x} />}
         </Resizable>
 
-        <div className='flex-grow' />
+        <MainView />
       </div>
     </Background>
   );
