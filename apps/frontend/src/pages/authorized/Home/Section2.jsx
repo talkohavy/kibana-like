@@ -7,7 +7,7 @@ import UploadFileIcon from '../../../utils/svgs/UploadFileIcon';
 
 export default function Section2() {
   return (
-    <div className='flex items-start justify-between gap-5'>
+    <div className='mx-auto flex max-w-7xl items-start justify-between gap-5'>
       <div className='flex h-60 w-full flex-col items-start justify-between'>
         <h2 className='text-lg font-bold'>Get started by adding integrations</h2>
 
@@ -16,7 +16,7 @@ export default function Section2() {
           upload a file. If you're not ready to use your own data, play with a sample data set.
         </p>
 
-        <div className='flex w-full items-center justify-between'>
+        <div className='flex w-full items-center justify-start gap-x-9'>
           <Button
             label={
               <div className='flex items-center justify-between gap-2'>
