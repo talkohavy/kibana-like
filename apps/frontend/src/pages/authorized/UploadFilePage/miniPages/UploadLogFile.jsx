@@ -117,8 +117,6 @@ export default function UploadLogFile() {
     setData(formData);
   };
 
-  console.log(data);
-
   if (isUploading) {
     return (
       <div className='space-y-6 p-12'>
@@ -240,12 +238,13 @@ export default function UploadLogFile() {
     <>
       <input id='fileUpload' type='file' accept='*' className='h-0 w-0' onChange={loadMyFiles} />
 
-      <div className='space-y-6 p-12'>
-        <div className='flex w-full items-center justify-between gap-10'>
+      <div className='mx-auto max-w-5xl space-y-6 p-12'>
+        <div className='flex w-full items-center justify-start gap-10'>
           <div className='h-full rounded-lg p-6'>
             <FolderPlus size={100} />
           </div>
-          <div className='space-y-3 text-lg'>
+
+          <div className='flex-grow space-y-3'>
             <h1 className='text-3xl font-bold'>Visualize data from a log file</h1>
 
             <p>Upload your file, analyze its data, and optionally import the data into an Elasticsearch index.</p>
