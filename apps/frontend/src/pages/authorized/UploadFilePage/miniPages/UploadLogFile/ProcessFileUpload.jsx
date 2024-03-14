@@ -63,7 +63,7 @@ export default function ProcessFileUpload({ isUploading }) {
         newState[1].status = 'in-progress';
         return newState;
       });
-    }, 2000);
+    }, 200);
 
     setTimeout(() => {
       setStagesUpdated((prevState) => {
@@ -72,7 +72,7 @@ export default function ProcessFileUpload({ isUploading }) {
         newState[2].status = 'in-progress';
         return newState;
       });
-    }, 5000);
+    }, 800);
 
     setTimeout(() => {
       setStagesUpdated((prevState) => {
@@ -81,7 +81,7 @@ export default function ProcessFileUpload({ isUploading }) {
         newState[3].status = 'in-progress';
         return newState;
       });
-    }, 10000);
+    }, 800);
 
     setTimeout(() => {
       setStagesUpdated((prevState) => {
@@ -90,7 +90,7 @@ export default function ProcessFileUpload({ isUploading }) {
         newState[4].status = 'in-progress';
         return newState;
       });
-    }, 11000);
+    }, 600);
 
     setTimeout(() => {
       setStagesUpdated((prevState) => {
@@ -99,7 +99,7 @@ export default function ProcessFileUpload({ isUploading }) {
         return newState;
       });
       setIsViewButtonDisabled(false);
-    }, 14000);
+    }, 800);
   }, [isUploading]);
 
   return (
