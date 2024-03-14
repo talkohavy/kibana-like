@@ -1,29 +1,4 @@
-type ErrorValidationProps = {
-  isError?: string;
-  /**
-   * Name - will be used for displaying the error message.
-   */
-  name?: string;
-  /**
-   * When a generic error name exist, mention it specifically!
-   *
-   * i.e. birthYear --> year
-   *
-   * Defaults to the same value as the prop `name`.
-   * @default {name}
-   */
-  errorName?: string;
-  setIsTouched?: (value: any) => void;
-  validateFunc?: (value: any) => void;
-  langCode?: string;
-  /**
-   * @default ''
-   * A data test id with the suffix of Input.
-   */
-  testId?: string;
-};
-
-type BasicInputProps = ErrorValidationProps & {
+type BasicInputProps = {
   /**
    * The input's type.
    * Possible options are: text | password
@@ -33,6 +8,7 @@ type BasicInputProps = ErrorValidationProps & {
   value: any;
   defaultValue?: any;
   isDisabled?: boolean;
+  errorMessage?: string;
   setValue: (value: any) => void;
   /**
    * A _**rule**_ function to prevent setSelectedValue from being called.
@@ -40,16 +16,17 @@ type BasicInputProps = ErrorValidationProps & {
    */
   dontChangeRule?: (e: any, value: any) => { change: boolean; newValue: any };
   /**
-   * If a number is provided, setValue will be debounced by that amount.
-   * The custom Input keeps an inner value, which is exactly the same as the outer value (provided through `value`), if debounceTime is not used.
+   * If a number is provided, setValue will be debounced by that ammount.
+   * The custom Input keeps an inner value, which is exactly the same as the outer value (provided throught `value`), if debounceTime is not used.
    * Once debounceTime is used, you in fact separate the 2 value.
    * For an X period of time, the inner value will be _the more_ updated one, where-as the outer value will match it within X time.
    *
    * **IMPORTANT NOTE!!!**
    * Do NOT pass debounceTime when the input is used inside a form, or anywhere where there's a confirmation/submit button!
-   * Since validation is being delayed, a race condition might occur that would interfere with your original intentions.
+   * Since validation is being delayed, a race condition might occur that would interfer with your original intentions.
    */
   debounceTime?: number;
+  isAlwaysFloating?: boolean;
   wrapperClassName?: string;
   inputClass?: string;
   inputStyle?: any;
@@ -72,14 +49,25 @@ type BasicInputProps = ErrorValidationProps & {
 // -----------------------
 type InputFloatProps = BasicInputProps & {
   labelContent?: string;
-  iconRenderer?: () => React.ReactNode;
-  textSecurity?: boolean;
   /**
    * isRTL?
    * @default undefined
    */
   isRTL?: boolean;
+  rendererRight?: (props: {
+    isFocused: boolean;
+    isHovered: boolean;
+  }) => React.ReactNode;
+  rendererLeft?: (props: {
+    isFocused: boolean;
+    isHovered: boolean;
+  }) => React.ReactNode;
 };
+
+// --------------------------
+// Type 2: InputPasswordProps
+// --------------------------
+type InputPasswordProps = Omit<InputFloatProps, 'type'>;
 
 // ----------------------
 // Type 3: InputFlatProps
@@ -113,4 +101,4 @@ type SelectFloatProps = BasicInputProps & {
   isRTL?: boolean;
 };
 
-export type { BasicInputProps, InputFlatProps, InputFloatProps, SelectFloatProps };
+export type { BasicInputProps, InputFlatProps, InputFloatProps, InputPasswordProps, SelectFloatProps };

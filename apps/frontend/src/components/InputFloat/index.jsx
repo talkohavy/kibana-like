@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
-import MyEyeIcon from '../../utils/svgs/MyEyeIcon';
+import { twMerge } from 'tailwind-merge';
 import { wrapInDebounce } from '../../utils/wrapInDebounce';
 
 const defaultDontChangeRule = (_e, newValue) => ({ change: true, newValue });
@@ -11,7 +11,7 @@ const CLASSES = {
   inputWrapper:
     '[&:has(input:disabled)]:border-slate-400 border-1.5 group relative flex items-center justify-between border-gray-800 focus-within:border-blue-700 hover:border-blue-300 focus-within:hover:border-blue-700 dark:border-black dark:bg-slate-600 dark:focus-within:border-sky-100',
   label:
-    'translate-y-half pointer-events-none absolute z-10 my-0 h-4 flex w-auto items-center justify-center rounded-full bg-white px-1 py-0 transition-all hover:cursor-text ltr:left-3 rtl:right-3 dark:bg-slate-600',
+    'pointer-events-none absolute z-10 my-0 flex h-4 w-auto translate-y-half items-center justify-center rounded-full bg-white px-1 py-0 text-lg transition-all hover:cursor-text group-focus-within:text-blue-700 dark:bg-slate-600 dark:group-focus-within:text-white ltr:left-3 rtl:right-3',
   topLevelWrapper: 'relative max-w-full rounded-md bg-transparent',
 };
 
@@ -32,26 +32,21 @@ export default function InputFloat({
   onInputClick,
   onInputKeyDown,
   isDisabled,
-  isError,
-  name,
-  iconRenderer,
-  errorName = name,
-  setIsTouched,
-  validateFunc,
   isRTL,
   testId = '',
-  textSecurity = false,
   debounceTime,
+  isAlwaysFloating,
+  rendererRight,
+  rendererLeft,
 }) {
   // all useStates:
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [innerValue, setInnerValue] = useState(() => value);
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   useEffect(() => setInnerValue(value), [value]);
 
-  const isFloating = isFocused || innerValue !== '';
+  const isFloating = isFocused || innerValue !== '' || !!rendererLeft || isAlwaysFloating;
 
   // all useCallbacks:
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,15 +75,15 @@ export default function InputFloat({
   };
   const onBlur = (e) => {
     setIsFocused(false);
-    setIsTouched?.((prevState) => ({ ...prevState, [name]: true }));
     onInputBlur?.(e, { setIsFocused, setInnerValue }); // A SelectFloat will validate in here
-    validateFunc?.(innerValue); // While used as a normal InputFloat, it will validate here.
   };
   const onClick = () => {
     setIsFocused(true);
     onInputClick?.();
   };
-  const onKeyDown = (e) => onInputKeyDown?.(e, { setIsFocused });
+  const onKeyDown = (e) => {
+    onInputKeyDown?.(e, { setIsFocused });
+  };
   const onMouseEnter = useCallback(() => setIsHovered(true), []);
   const onMouseLeave = useCallback(() => setIsHovered(false), []);
 
@@ -98,42 +93,34 @@ export default function InputFloat({
         className={clsx(
           CLASSES.commonInputAndInputWrapper,
           CLASSES.inputWrapper,
-          isError && !isFocused && 'border-red-500 text-red-500 dark:border-red-500',
           isDisabled ? 'bg-gray-100' : 'bg-white',
         )}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        style={{ direction: type === 'password' ? 'ltr' : undefined }}
       >
         {labelContent && (
           <label
-            className={clsx(
+            className={twMerge(
               CLASSES.label,
-              isFloating ? 'scale-80 top-0 ltr:-translate-x-10 rtl:translate-x-10' : 'translate-y-half top-1/2',
+              isFloating ? 'top-0 scale-80 ltr:-translate-x-10 rtl:translate-x-10' : 'top-1/2 translate-y-half',
               isDisabled && 'text-slate-400',
-              isFocused
-                ? 'text-blue-700 dark:text-sky-400'
-                : isError
-                  ? 'text-red-600'
-                  : isHovered && 'text-blue-300 transition-none',
             )}
             style={{ direction: isRTL === undefined ? undefined : isRTL ? 'rtl' : 'ltr' }}
           >
             {labelContent}
           </label>
         )}
-
-        {iconRenderer?.()}
+        {rendererRight?.({ isFocused, isHovered })}
 
         <input
-          type={isPasswordVisible ? 'text' : type}
+          type={type}
           value={innerValue}
           onChange={onChange}
           className={clsx(
             CLASSES.commonInputAndInputWrapper,
             CLASSES.input,
-            type === 'password' && 'text-left',
-            textSecurity && !isPasswordVisible && 'text-security-disc',
+            rendererLeft && 'ltr:pl-10 rtl:pr-10',
+            rendererRight && 'ltr:pr-10 rtl:pl-10',
             inputClass,
           )}
           style={inputStyle}
@@ -143,28 +130,12 @@ export default function InputFloat({
           onKeyDown={onKeyDown}
           autoFocus={autoFocus}
           autoComplete='off'
-          name={name}
           disabled={isDisabled}
           data-test-id={`${testId}Input`}
         />
-        {(type === 'password' || textSecurity) && (
-          <button type='button' className='mr-3'>
-            <MyEyeIcon
-              size={20}
-              aria-label='peek'
-              data-test-id={`${testId}InputPeek`}
-              onMouseDown={() => setIsPasswordVisible(true)}
-              onMouseUp={() => setIsPasswordVisible(false)}
-              isPasswordHidden={!isPasswordVisible}
-            />
-          </button>
-        )}
+
+        {rendererLeft?.({ isFocused, isHovered })}
       </div>
-      {isError && !isFocused && (
-        <div className='flex items-center justify-end px-1 py-0 text-lg text-red-500'>
-          {`errors.${errorName}.${isError}`}
-        </div>
-      )}
     </div>
   );
 }
