@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   publicDir: './public', // default is "public". The location of the public dir relative to the index.html file.
   server: {
     open: true,
-    port: 3000,
+    port: 3001,
     strictPort: true,
   },
   clearScreen: false, // <--- default is true. false prevents Vite from clearing the terminal screen when logging certain messages
