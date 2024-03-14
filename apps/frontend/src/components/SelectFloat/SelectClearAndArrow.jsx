@@ -1,39 +1,28 @@
-import clsx from 'clsx';
-import { imgArrow3 as imgDownArrow } from '@src/paths/images';
-import MyX from '@src/utils/DynamicImages/MyX';
+import { twMerge } from 'tailwind-merge';
+import DownArrow from '../../utils/svgs/DownArrow';
+import MyX from '../../utils/svgs/MyX';
 
-export default function SelectClearAndArrow({ isMenuOpen, isFocused, isHovered, isError, onClearClick, onArrowClick }) {
-  const handleClickOrKeyDown = (e) => {
-    if (e.type === 'click' || (['Enter', 'NumpadEnter'].includes(e.code) && !e.shiftKey)) {
-      e.preventDefault();
-
-      onArrowClick();
-    }
-  };
-
+export default function SelectClearAndArrow({ isMenuOpen, isFocused, isHovered, onClearClick, isValue }) {
   return (
-    <div
-      className='absolute top-1/2 flex h-10 w-12 translate-y-half items-center justify-between ltr:right-4 rtl:left-4'
-      tabIndex={-1}
-      onClick={handleClickOrKeyDown}
-      onKeyDown={handleClickOrKeyDown}
-    >
-      <MyX
-        width={20}
-        strokeWidth={12}
-        className={clsx(
-          'cursor-pointer rounded-full stroke-gray-400 hover:stroke-gray-600 dark:stroke-blue-400',
-          isError && !isFocused && '!dark:stroke-red-500 !stroke-red-500',
-          isFocused || isHovered ? 'visible' : 'invisible',
-        )}
+    <>
+      <div className='pointer-events-none absolute top-1/2 z-10 flex translate-y-half items-center justify-center ltr:right-4 rtl:left-4'>
+        <DownArrow className={twMerge('relative top-0.5 stroke-blue-600', isMenuOpen && 'top-0 rotate-180')} />
+      </div>
+
+      <button
+        type='button'
         onClick={onClearClick}
-      />
-      <img
-        className={clsx('relative top-0.5  h-3 w-5', isMenuOpen && '-top-0.5 rotate-180')}
-        src={imgDownArrow}
-        alt='down arrow'
-        tabIndex={-1}
-      />
-    </div>
+        className='absolute top-1/2 z-10 flex translate-y-half items-center justify-between ltr:right-10 rtl:left-10'
+      >
+        <MyX
+          size={20}
+          className={twMerge(
+            'rounded-full stroke-gray-400 hover:stroke-red-600',
+            isValue && (isFocused || isHovered) ? 'visible' : 'invisible',
+          )}
+          title='Clear'
+        />
+      </button>
+    </>
   );
 }

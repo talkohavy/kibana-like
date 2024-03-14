@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import InputFloat from '../InputFloat';
+import SelectClearAndArrow from './SelectClearAndArrow';
 import SelectMenu from './SelectMenu';
-
-// import SelectClearAndArrow from './SelectClearAndArrow';
 
 const defaultDontChangeRule = (_e, newValue) => ({ change: true, newValue });
 const defaultGetOptionLabel = (option) => option.label;
@@ -30,12 +29,6 @@ export default function SelectFloat({
   inputStyle,
   moveToNextOnEnter = true,
   shouldFilterOptions = false, // Only AutoComplete will use this. A normal Select wouldn't.
-  isError,
-  name,
-  errorName = name,
-  setIsTouched,
-  validateFunc,
-  langCode,
   isRTL,
   testId = '',
 }) {
@@ -49,7 +42,7 @@ export default function SelectFloat({
   const [hoveredOptionIndex, setHoveredOptionIndex] = useState(-1);
 
   useEffect(() => {
-    // Switching between langauges switches the searchValue label:
+    // Switching between languages switches the searchValue label:
     const option = getOptionByValue({ options, value });
     option && setSearchValue(getOptionLabel(option));
     setFilteredOptions(options);
@@ -92,7 +85,6 @@ export default function SelectFloat({
 
         newOption && setSearchValue(getOptionLabel(newOption));
       }
-      validateFunc?.(newValue);
 
       setIsFocused(false);
       setIsMenuOpen(false);
@@ -104,7 +96,6 @@ export default function SelectFloat({
     Escape: (_e, { setIsFocused }) => {
       setIsFocused(false);
       setIsMenuOpen(false);
-      validateFunc?.(value);
     },
     Tab(e, { setIsFocused }) {
       this.Enter(e, { setIsFocused, shouldUseHoveredIndex: false, shouldPreventDefault: false });
@@ -124,7 +115,6 @@ export default function SelectFloat({
   };
 
   const onInputFocus = () => setIsMenuOpen(true);
-
   const onInputChange = ({ newValue }) => {
     // Step 1: open menu on letter typing
     !isMenuOpen && setIsMenuOpen(true);
@@ -145,20 +135,13 @@ export default function SelectFloat({
     }
   };
 
-  // const onClearClick = (e) => {
-  //   e.stopPropagation();
-  //   setIsTouched?.((prevState) => ({ ...prevState, [name]: true }));
-  //   setSearchValue('');
-  //   setValue(0);
-  //   shouldFilterOptions && setFilteredOptions(options);
-  // };
+  const onClearClick = (e) => {
+    e.stopPropagation();
+    setSearchValue('');
+    setValue(0);
+    shouldFilterOptions && setFilteredOptions(options);
+  };
 
-  // const onArrowClick = (e) => {
-  //   e.stopPropagation();
-  //   setIsMenuOpen(!isMenuOpen);
-  // };
-
-  // -------------- Render GUI ----------------
   return (
     <div
       className={clsx('relative flex h-fit w-full rounded-md bg-transparent', isMenuOpen && 'z-30', wrapperClassName)}
@@ -176,22 +159,16 @@ export default function SelectFloat({
         onInputKeyDown={onInputKeyDown}
         onInputBlur={onInputBlur}
         onInputFocus={onInputFocus}
-        // renderer={({ isFocused, isHovered }) => (
-        //   <SelectClearAndArrow
-        //     isFocused={isFocused}
-        //     isHovered={isHovered}
-        //     isMenuOpen={isMenuOpen}
-        //     isError={isError}
-        //     onClearClick={onClearClick}
-        //     onArrowClick={onArrowClick}
-        //   />
-        // )}
+        rendererRight={({ isFocused, isHovered }) => (
+          <SelectClearAndArrow
+            isFocused={isFocused}
+            isHovered={isHovered}
+            isMenuOpen={isMenuOpen}
+            onClearClick={onClearClick}
+            isValue={!!searchValue}
+          />
+        )}
         moveToNextOnEnter={moveToNextOnEnter}
-        isError={isError}
-        name={name}
-        errorName={errorName}
-        setIsTouched={setIsTouched}
-        langCode={langCode}
         isRTL={isRTL}
         testId={`${testId}Select`}
       />
@@ -203,7 +180,6 @@ export default function SelectFloat({
           value={value}
           setValue={setValue}
           setSearchValue={setSearchValue}
-          validateFunc={validateFunc}
           getOptionLabel={getOptionLabel}
           labelOnEmptyList={labelOnEmptyList}
           hoveredOptionIndex={hoveredOptionIndex}

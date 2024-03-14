@@ -9,7 +9,7 @@
     "build": "vite build --emptyOutDir",
     "preview": "vite preview",
     "vite-optimize": "vite optimize --force",
-    "lint": "eslint -c .eslintrc.json '**/*/*.{js,jsx,tsx,ts,d.ts,cjs,mjs}'",
+    "lint": "eslint -c .eslintrc.cjs '**/*/*.{js,jsx,tsx,ts,d.ts,cjs,mjs}'",
     "lint-fix": "eslint --fix -c .eslintrc.cjs '**/*/*.{js,jsx,tsx,ts,d.ts,cjs,mjs}'",
     "format": "biome format --verbose ./src",
     "format-prettier": "prettier . --check --config ../../.prettierrc.mjs --ignore-path ../../.prettierignore",

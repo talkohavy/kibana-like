@@ -1,0 +1,5 @@
+<svg fill='none' stroke="currentColor" stroke-width="8" viewBox='0 0 100 100'>
+  <title>x mark</title>
+  <path stroke-linecap='round' d='M 20 20 , L 80 80' />
+  <path stroke-linecap='round' d='M80 20 , L 20 80' />
+</svg>

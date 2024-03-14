@@ -34,7 +34,7 @@ export default function LoginPage() {
             value={password}
             setValue={setPassword}
             // eslint-disable-next-line
-            iconRenderer={() => <LockIcon className='ml-2' />}
+            rendererLeft={() => <LockIcon className='ml-2' />}
           />
         </div>
 

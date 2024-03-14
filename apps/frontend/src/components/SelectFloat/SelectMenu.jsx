@@ -1,4 +1,4 @@
-import React, { forwardRef, useMemo } from 'react';
+import { forwardRef, useMemo } from 'react';
 import clsx from 'clsx';
 import { FixedSizeList as List } from 'react-window';
 import SelectMenuItem from './SelectMenuItem';
@@ -13,7 +13,6 @@ function SelectMenu(
     value,
     setValue,
     setSearchValue,
-    validateFunc,
     getOptionLabel,
     labelOnEmptyList,
     hoveredOptionIndex,
@@ -35,13 +34,12 @@ function SelectMenu(
         if (e.button === 2) return;
         setValue(optionValue);
         setSearchValue(optionLabel);
-        validateFunc?.(optionValue);
         setIsMenuOpen(false);
       };
 
       return { value: optionValue, label: optionLabel, onMenuItemClick };
     });
-  }, [options, getOptionLabel, labelOnEmptyList, setValue, setSearchValue, setIsMenuOpen, validateFunc]);
+  }, [options, getOptionLabel, labelOnEmptyList, setValue, setSearchValue, setIsMenuOpen]);
 
   return (
     <div
