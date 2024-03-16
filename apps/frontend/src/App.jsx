@@ -11,7 +11,7 @@ const FirstConfigure = lazy(() => import('./pages/unauthorized/FirstConfigure'))
 const Login = lazy(() => import('./pages/unauthorized/Login'));
 const HomePage = lazy(() => import('./pages/authorized/Home'));
 const UploadFilePage = lazy(() => import('./pages/authorized/UploadFilePage'));
-const PageNotFound = lazy(() => import('./pages/PageNotFound'));
+const PageNotFound = lazy(() => import('./pages/unauthorized/PageNotFound'));
 
 function App() {
   const { isLogged: isAuthorized } = useSelector(
